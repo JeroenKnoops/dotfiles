@@ -1,6 +1,6 @@
 # dotfiles
 
-## manual installation
+## Manual installation [Ubuntu 22.04.1 LTS](https://ubuntu.com/download/desktop)
 
 ### Git / Curl
 
