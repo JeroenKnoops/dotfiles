@@ -9,6 +9,11 @@ sudo apt-get update
 sudo apt-get install git curl
 ```
 
+```bash
+git config --global credential.helper store
+git config --global credential.helper cache
+```
+
 ### ssh-key
 
 Put your ssh key on the appropriate place or even better, create a new key.
