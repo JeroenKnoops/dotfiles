@@ -7,7 +7,7 @@ See https://github.com/jeroenknoops/nixos-configurations
 
 ### NeoVim
 
-`stow --restow --target ~/.config/nvim nvim`
+`stow --restow --target ~/.config/ .`
 
 ### ssh-key
 
