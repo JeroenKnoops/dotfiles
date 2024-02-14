@@ -1,25 +1,14 @@
 # dotfiles
 
-## Manual installation [Ubuntu 22.04.1 LTS](https://ubuntu.com/download/desktop)
+## Nix configuration
 
-### Git / Curl
+I use Nix to manage my systems.
+See https://github.com/jeroenknoops/nixos-configurations
 
-```bash
-sudo apt-get update
-sudo apt-get install git curl
-```
+### NeoVim
 
-```bash
-git config --global credential.helper store
-git config --global credential.helper cache
-```
+`stow --restow --target ~/.config/nvim nvim`
 
 ### ssh-key
 
-Put your ssh key on the appropriate place or even better, create a new key.
-
-### chezmoi
-
-```bash
-snap install chezmoi --classic
-```
+Use 1password to manage your SSH key. 1password can not be installed with Nix in MacOS
