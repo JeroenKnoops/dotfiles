@@ -51,3 +51,15 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 5
 
+-- Sync clipboard with system clipboard
+vim.schedule(function()
+    vim.opt.clipboard = "unnamedplus"
+end)
+
+-- Highlight on yank
+vim.cmd([[
+  augroup YankHighlight
+    autocmd!
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+  augroup end
+]])
