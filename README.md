@@ -38,7 +38,7 @@ This is the folder with my basic nvim setup
 - Enable flakes ( `~/.config/nix/nix.conf` )
 - Install home-manager ( with flakes )
   - `nix run home-manager/master -- init --switch`
-- Install packages ( `home-manager switch --flake .#yourusername@non-nixos-machine`)
+- Install packages ( `home-manager switch --flake .#jeroenknoops@sh101` )
 
 ### MacOS
 
