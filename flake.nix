@@ -9,7 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     pwdc.url = "github:JeroenKnoops/pwdc";
-    dotfile = {
+    dotfiles = {
       url = "git+https://github.com/jeroenknoops/dotfiles.git";
       flake = false;
     };
@@ -33,21 +33,18 @@
         };
 
         "phnl310118059@MACHXPVL4MXK7" = home-manager.lib.homeManagerConfiguration {
-          system = "aarch64-darwin";
-          host = "MACHXPVL4MXK7";
-          pkgs = import nixpkgs { system = ${system}; };
+          pkgs = import nixpkgs { system = "aarch64-darwin"; };
 
           # Specify your home configuration modules here, for example,
           # the path to your home.nix.
           modules = [ 
-            ./home/${host}/home.nix 
-            ./home/${host}/git.nix 
-            ./home/${host}/zsh.nix 
-            ./home/${host}/tmux.nix 
-            ./home/${host}/darwin-aerospace.nix 
-            ./home/${host}/oh-my-posh.nix
-            ./home/${host}/dotfiles.nix
-            pwdc.homeModules.${system}.default
+            ./home/MACHXPVL4MXK7/home.nix 
+            ./home/MACHXPVL4MXK7/git.nix 
+            ./home/MACHXPVL4MXK7/zsh.nix 
+            ./home/MACHXPVL4MXK7/darwin-aerospace.nix 
+            ./home/MACHXPVL4MXK7/oh-my-posh.nix
+            ./home/MACHXPVL4MXK7/dotfiles.nix
+            pwdc.homeModules."aarch64-darwin".default
           ];
 
           
@@ -55,8 +52,9 @@
           # to pass through arguments to home.nix
           extraSpecialArgs = {
             inherit inputs;
-            pwdcPackage = pwdc.packages.${system}.default;
+            pwdcPackage = pwdc.packages."aarch64-darwin".default;
           };
       };
     };
+  };
 }
