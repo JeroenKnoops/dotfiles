@@ -33,6 +33,7 @@ This is the folder with my basic nvim setup
 
 - Install Omarchy
 - Configure 1password - login - ssh
+- Setup touchID - SUPER + ALT + space / Setup > Security > Fingerprint 
 - Clone this repository
 - Install nix ( single user mode )
 - Enable flakes ( `~/.config/nix/nix.conf` )
