@@ -1,28 +1,38 @@
 { config, pkgs, lib, ... }: {
   programs = {
+    delta = {
+      enable = true;
+      enableGitIntegration = true;
+    };
     git = {
       enable = true;
-      delta.enable = true;
-      userEmail = "jeroen.knoops@philips.com";
-      userName = "Jeroen Knoops";
-      aliases = {
-        cm = "commit";
-        ca = "commit --amend --no-edit";
-        ps = "push";
-        pf = "push --force-with-lease";
-        st = "status -sb";
-        fplt = "log --first-parent --oneline --pretty=format:'%Cgreen%ad%Creset %C(auto)%h%d %s %C(bold black)<%aN>%Creset' --date=format-local:'%Y-%m-%d %H:%M'";
-        fpl = "log --first-parent --oneline --decorate-refs-exclude=refs/tags --decorate-refs-exclude=refs/remotes --decorate-refs-exclude=refs/heads --decorate-refs-exclude=HEAD --pretty=format:'%Cgreen%ad%Creset %C(auto)%h%d %s %C(bold black)<%aN>%Creset' --date=format-local:'%Y-%m-%d %H:%M'";
-        build-current = "for-each-ref --sort=-creatordate --format '%(refname:short) %(color:yellow)%(objectname:short) %(color:yellow)%(*objectname:short) %(color:blue)%(creatordate:iso) %(color:green)(%(creatordate:relative))%(color:reset)' --count=10 'refs/tags/synergy-yocto-build-current*'";
-        build-stable = "for-each-ref --sort=-creatordate --format '%(refname:short) %(color:yellow)%(objectname:short) %(color:yellow)%(*objectname:short) %(color:blue)%(creatordate:iso) %(color:green)(%(creatordate:relative))%(color:reset)' --count=10 'refs/tags/synergy-yocto-build-stable*'";
-        build-release = "for-each-ref --sort=-creatordate --format '%(refname:short) %(color:yellow)%(objectname:short) %(color:yellow)%(*objectname:short) %(color:blue)%(creatordate:iso) %(color:green)(%(creatordate:relative))%(color:reset)' --count=10 'refs/tags/synergy-yocto-build-v*'";
-      };
       ignores = [
         ".idea" ".vs" ".vsc" ".vscode" # ide
         ".DS_Store" # mac
         "node_modules" "npm-debug.log" # npm
       ];
-      extraConfig = {
+      signing = {
+        signByDefault = true;
+        key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB6uhyzK5oy4CHVGAadwbop1m2hOIQZWLuTqvLXG3PY+";
+        signer = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+      };
+      settings = {
+        user = {
+          email = "jeroen.knoops@philips.com";
+          name = "Jeroen Knoops";
+        };
+        alias = {
+          cm = "commit";
+          ca = "commit --amend --no-edit";
+          ps = "push";
+          pf = "push --force-with-lease";
+          st = "status -sb";
+          fplt = "log --first-parent --oneline --pretty=format:'%Cgreen%ad%Creset %C(auto)%h%d %s %C(bold black)<%aN>%Creset' --date=format-local:'%Y-%m-%d %H:%M'";
+          fpl = "log --first-parent --oneline --decorate-refs-exclude=refs/tags --decorate-refs-exclude=refs/remotes --decorate-refs-exclude=refs/heads --decorate-refs-exclude=HEAD --pretty=format:'%Cgreen%ad%Creset %C(auto)%h%d %s %C(bold black)<%aN>%Creset' --date=format-local:'%Y-%m-%d %H:%M'";
+          build-current = "for-each-ref --sort=-creatordate --format '%(refname:short) %(color:yellow)%(objectname:short) %(color:yellow)%(*objectname:short) %(color:blue)%(creatordate:iso) %(color:green)(%(creatordate:relative))%(color:reset)' --count=10 'refs/tags/synergy-yocto-build-current*'";
+          build-stable = "for-each-ref --sort=-creatordate --format '%(refname:short) %(color:yellow)%(objectname:short) %(color:yellow)%(*objectname:short) %(color:blue)%(creatordate:iso) %(color:green)(%(creatordate:relative))%(color:reset)' --count=10 'refs/tags/synergy-yocto-build-stable*'";
+          build-release = "for-each-ref --sort=-creatordate --format '%(refname:short) %(color:yellow)%(objectname:short) %(color:yellow)%(*objectname:short) %(color:blue)%(creatordate:iso) %(color:green)(%(creatordate:relative))%(color:reset)' --count=10 'refs/tags/synergy-yocto-build-v*'";
+        }; # gbrm is defined in zsh.nix
         init = { defaultBranch = "main"; };
         pull = {
           ff = false;
@@ -32,11 +42,6 @@
         delta = {
           line-numbers = true;
         };
-      };
-      signing = {
-        signByDefault = true;
-        key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB6uhyzK5oy4CHVGAadwbop1m2hOIQZWLuTqvLXG3PY+";
-        signer = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
       };
     };
     gh = {
