@@ -59,6 +59,7 @@
       pkgs.maccy
       pkgs.neofetch
       pkgs.nil
+      pkgs.nodejs
       pkgs.ratchet
       pkgs.protobuf
       pkgs.python313
