@@ -42,6 +42,12 @@
         delta = {
           line-numbers = true;
         };
+        gpg = {
+          format = "ssh";
+          ssh = {
+            allowedSignersFile = "~/.ssh/allowed_signers";
+          };
+        };
       };
     };
     gh = {
