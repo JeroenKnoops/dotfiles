@@ -1,8 +1,13 @@
 { config, pkgs, lib, ... }: {
   programs = {
     delta = {
-      enable = true;
+      enable = false;
       enableGitIntegration = true;
+      options = {
+        navigate = true;
+        line-numbers = true;
+        side-by-side = true;
+      };
     };
     git = {
       enable = true;
@@ -38,9 +43,6 @@
           ff = false;
           commit = false;
           rebase = true;
-        };
-        delta = {
-          line-numbers = true;
         };
         gpg = {
           format = "ssh";

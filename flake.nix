@@ -3,11 +3,14 @@
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    fh.url = "https://flakehub.com/f/DeterminateSystems/fh/*.tar.gz";
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*.tar.gz";
+
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     pwdc.url = "github:JeroenKnoops/pwdc";
     dotfiles = {
       url = "git+https://github.com/jeroenknoops/dotfiles.git";
@@ -16,7 +19,7 @@
   };
 
   outputs =
-    { nixpkgs, home-manager, pwdc, dotfiles, ... }@inputs: {
+    { nixpkgs, home-manager, fh, pwdc, dotfiles, ... }@inputs: {
 
       homeConfigurations = {
         "jeroenknoops@sh101" = home-manager.lib.homeManagerConfiguration {
@@ -25,6 +28,9 @@
           # Specify your home configuration modules here, for example,
           # the path to your home.nix.
           modules = [ 
+            {
+               environment.systemPackages = [ fh.packages.x86_64-linux.default ];
+            }
             ./home/sh101-home.nix
           ];
 
