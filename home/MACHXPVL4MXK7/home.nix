@@ -61,6 +61,7 @@
       pkgs.nil
       pkgs.nodejs
       pkgs.ratchet
+      pkgs.opencode
       pkgs.protobuf
       pkgs.python313
       pkgs.python313Packages.pip

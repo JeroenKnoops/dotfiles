@@ -51,9 +51,9 @@
         SA = "/Users/Shared/PhilipsDev/synergy/synergy-auth";
         SD = "/Users/Shared/PhilipsDev/synergy/synergy-doc";
         SYB = "/Users/Shared/PhilipsDev/synergy/synergy-yocto-build";
+        SYMS = "/Users/Shared/PhilipsDev/synergy/synergy-yocto-meta-synergy";
         SB = "/Users/Shared/PhilipsDev/synergy/synergy-base";
         BLURK = "/Users/Shared/PhilipsDev/synergy/synergy-base";
-        SYMS = "/Users/Shared/PhilipsDev/synergy/synergy-yocto-meta-synergy";
         MGL = "/Users/Shared/PhilipsDev/synergy/synergy-mgl-base";
 
         WSYB = "/Users/Shared/PhilipsDev/synergy/worktrees/synergy-yocto-build";

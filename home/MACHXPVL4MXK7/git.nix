@@ -1,14 +1,5 @@
 { config, pkgs, lib, ... }: {
   programs = {
-    delta = {
-      enable = false;
-      enableGitIntegration = true;
-      options = {
-        navigate = true;
-        line-numbers = true;
-        side-by-side = true;
-      };
-    };
     git = {
       enable = true;
       ignores = [
