@@ -16,10 +16,14 @@
       url = "git+https://github.com/jeroenknoops/dotfiles.git";
       flake = false;
     };
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    { nixpkgs, home-manager, fh, pwdc, dotfiles, ... }@inputs: {
+    { nixpkgs, home-manager, fh, pwdc, dotfiles, nix-index-database, ... }@inputs: {
 
       homeConfigurations = {
         "jeroenknoops@sh101" = home-manager.lib.homeManagerConfiguration {
@@ -51,6 +55,7 @@
             ./home/MACHXPVL4MXK7/oh-my-posh.nix
             ./home/MACHXPVL4MXK7/dotfiles.nix
             pwdc.homeModules."aarch64-darwin".default
+            nix-index-database.homeModules.default
           ];
 
           

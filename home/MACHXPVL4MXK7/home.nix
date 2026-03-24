@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, nix-index-database, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -137,6 +137,11 @@
     fzf = {
       enable = true;
       enableZshIntegration = true;
+    };
+    nix-index-database = {
+      comma = {
+        enable = true;
+      };
     };
   };
 
