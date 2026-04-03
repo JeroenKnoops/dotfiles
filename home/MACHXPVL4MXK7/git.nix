@@ -56,7 +56,7 @@
         core = {
           pager = "";
           editor = "nvim";
-          hooksPath = "\${XDG_DATA_HOME:-~/.local/share}/lolcommits-git-hooks";
+          hooksPath = "/Users/phnl310181059/.local/share/lolcommits-git-hooks";
         };
       };
     };
@@ -81,8 +81,9 @@
     ".local/share/lolcommits-git-hooks/post-commit" = {
       text = ''
         #!/bin/sh
-        export LOLCOMMITS_DELAY=0.5
-        lolcommits
+        export LOLCOMMITS_DELAY=2.5
+        export LOLCOMMITS_FORK=1
+        lolcommits --capture
       '';
       executable = true;
     };
