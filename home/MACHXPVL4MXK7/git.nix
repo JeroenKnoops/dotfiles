@@ -81,6 +81,7 @@
     ".local/share/lolcommits-git-hooks/post-commit" = {
       text = ''
         #!/bin/sh
+        export LOLCOMMITS_DELAY=0.5
         lolcommits
       '';
       executable = true;
