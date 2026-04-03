@@ -1,11 +1,21 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   programs = {
     git = {
       enable = true;
       ignores = [
-        ".idea" ".vs" ".vsc" ".vscode" # ide
+        ".idea"
+        ".vs"
+        ".vsc"
+        ".vscode" # ide
         ".DS_Store" # mac
-        "node_modules" "npm-debug.log" # npm
+        "node_modules"
+        "npm-debug.log" # npm
       ];
       signing = {
         signByDefault = true;
@@ -29,7 +39,9 @@
           build-stable = "for-each-ref --sort=-creatordate --format '%(refname:short) %(color:yellow)%(objectname:short) %(color:yellow)%(*objectname:short) %(color:blue)%(creatordate:iso) %(color:green)(%(creatordate:relative))%(color:reset)' --count=10 'refs/tags/synergy-yocto-build-stable*'";
           build-release = "for-each-ref --sort=-creatordate --format '%(refname:short) %(color:yellow)%(objectname:short) %(color:yellow)%(*objectname:short) %(color:blue)%(creatordate:iso) %(color:green)(%(creatordate:relative))%(color:reset)' --count=10 'refs/tags/synergy-yocto-build-v*'";
         }; # gbrm is defined in zsh.nix
-        init = { defaultBranch = "main"; };
+        init = {
+          defaultBranch = "main";
+        };
         pull = {
           ff = false;
           commit = false;
@@ -40,6 +52,10 @@
           ssh = {
             allowedSignersFile = "~/.ssh/allowed_signers";
           };
+        };
+        core = {
+          pager = "";
+          editor = "nvim";
         };
       };
     };

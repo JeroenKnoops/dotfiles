@@ -1,4 +1,11 @@
-{ config, pkgs, inputs, nix-index-database, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  nix-index-database,
+  lolcommits,
+  ...
+}:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -33,70 +40,71 @@
   };
 
   home.file.".config/nvim" = {
-    source  = "${inputs.dotfiles}/nvim";
+    source = "${inputs.dotfiles}/nvim";
     recursive = true;
   };
 
   # home.packages = with pkgsUnstable; [
-    home.packages = [
-      pkgs.aerospace
-      pkgs.any-nix-shell
-      pkgs.cacert
-      pkgs.cargo
-      pkgs.devbox
-      pkgs.direnv
-      pkgs.docker
-      pkgs.docker-buildx
-      pkgs.fd
-      pkgs.fly
-      pkgs.fzf
-      pkgs.git
+  home.packages = [
+    pkgs.aerospace
+    pkgs.any-nix-shell
+    pkgs.cacert
+    pkgs.cargo
+    pkgs.devbox
+    pkgs.direnv
+    pkgs.docker
+    pkgs.docker-buildx
+    pkgs.fd
+    pkgs.fly
+    pkgs.fzf
+    pkgs.git
     #      pkgs.gitbutler
-      pkgs.gnugrep
-      pkgs.graphviz
-      pkgs.gti
-      pkgs.jq
-      pkgs.maccy
-      pkgs.neofetch
-      pkgs.nil
-      pkgs.nodejs
-      pkgs.ratchet
-      pkgs.opencode
-      pkgs.protobuf
-      pkgs.python313
-      pkgs.python313Packages.pip
-      pkgs.pipenv
-      pkgs.qemu
-      pkgs.ripgrep
-      pkgs.stack
-      pkgs.stow
-      pkgs.tmux
-      pkgs.toilet
-      pkgs.typescript
-      pkgs.virtualenv
-      pkgs.vscode
-      pkgs.watch
-      pkgs.wget
-      pkgs.yazi
-      pkgs.yq-go
-      pkgs.zellij
-      pkgs.zld
-      pkgs.zsh
-      pkgs.zsh-syntax-highlighting
-      pkgs.jujutsu
-      pkgs.nixfmt
-      pkgs.nerd-fonts.fira-code
-      pkgs.nerd-fonts.inconsolata
-      pkgs.nerd-fonts.jetbrains-mono
-      pkgs.nerd-fonts.roboto-mono
-      pkgs.nerd-fonts.fantasque-sans-mono
-      pkgs.nerd-fonts.hack
+    pkgs.gnugrep
+    pkgs.graphviz
+    pkgs.gti
+    pkgs.jq
+    pkgs.maccy
+    pkgs.neofetch
+    pkgs.nil
+    pkgs.nodejs
+    pkgs.ratchet
+    pkgs.opencode
+    pkgs.protobuf
+    pkgs.python313
+    pkgs.python313Packages.pip
+    pkgs.pipenv
+    pkgs.qemu
+    pkgs.ripgrep
+    pkgs.stack
+    pkgs.stow
+    pkgs.tmux
+    pkgs.toilet
+    pkgs.typescript
+    pkgs.virtualenv
+    pkgs.vscode
+    pkgs.watch
+    pkgs.wget
+    pkgs.yazi
+    pkgs.yq-go
+    pkgs.zellij
+    pkgs.zld
+    pkgs.zsh
+    pkgs.zsh-syntax-highlighting
+    pkgs.jujutsu
+    pkgs.nixfmt
+    pkgs.nerd-fonts.fira-code
+    pkgs.nerd-fonts.inconsolata
+    pkgs.nerd-fonts.jetbrains-mono
+    pkgs.nerd-fonts.roboto-mono
+    pkgs.nerd-fonts.fantasque-sans-mono
+    pkgs.nerd-fonts.hack
+    lolcommits
   ];
 
   home.sessionVariables = {
     # EDITOR = "emacs";
     # I like DIRENV to be silent
-    DIRENV_LOG_FORMAT = ""; 
+    DIRENV_LOG_FORMAT = "";
   };
 
   programs = {

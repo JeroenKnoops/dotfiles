@@ -20,52 +20,54 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lolcommits-flake.url = "github:JeroenKnoops/lolcommits-flake";
   };
 
   outputs =
-    { nixpkgs, home-manager, fh, pwdc, dotfiles, nix-index-database, ... }@inputs: {
+    {
+      nixpkgs,
+      home-manager,
+      fh,
+      pwdc,
+      dotfiles,
+      nix-index-database,
+      lolcommits-flake,
+      ...
+    }@inputs:
+    {
 
       homeConfigurations = {
         "jeroenknoops@sh101" = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs { system = "x86_64-linux"; };
 
-          # Specify your home configuration modules here, for example,
-          # the path to your home.nix.
-          modules = [ 
+          modules = [
             {
-               environment.systemPackages = [ fh.packages.x86_64-linux.default ];
+              environment.systemPackages = [ fh.packages.x86_64-linux.default ];
             }
             ./home/sh101-home.nix
           ];
-
-          # Optionally use extraSpecialArgs
-          # to pass through arguments to home.nix
         };
 
         "phnl310118059@MACHXPVL4MXK7" = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs { system = "aarch64-darwin"; };
 
-          # Specify your home configuration modules here, for example,
-          # the path to your home.nix.
-          modules = [ 
-            ./home/MACHXPVL4MXK7/home.nix 
-            ./home/MACHXPVL4MXK7/git.nix 
-            ./home/MACHXPVL4MXK7/zsh.nix 
-            ./home/MACHXPVL4MXK7/darwin-aerospace.nix 
+          modules = [
+            ./home/MACHXPVL4MXK7/home.nix
+            ./home/MACHXPVL4MXK7/git.nix
+            ./home/MACHXPVL4MXK7/zsh.nix
+            ./home/MACHXPVL4MXK7/darwin-aerospace.nix
             ./home/MACHXPVL4MXK7/oh-my-posh.nix
             ./home/MACHXPVL4MXK7/dotfiles.nix
             pwdc.homeModules."aarch64-darwin".default
             nix-index-database.homeModules.default
           ];
 
-          
-          # Optionally use extraSpecialArgs
-          # to pass through arguments to home.nix
           extraSpecialArgs = {
             inherit inputs;
             pwdcPackage = pwdc.packages."aarch64-darwin".default;
+            lolcommits = lolcommits-flake.packages."aarch64-darwin".default;
           };
+        };
       };
     };
-  };
 }
