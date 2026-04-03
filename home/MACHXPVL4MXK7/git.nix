@@ -56,6 +56,7 @@
         core = {
           pager = "";
           editor = "nvim";
+          hooksPath = "\${XDG_DATA_HOME:-~/.local/share}/lolcommits-git-hooks";
         };
       };
     };
@@ -75,6 +76,17 @@
       };
     };
   };
+
+  home.file = {
+    ".local/share/lolcommits-git-hooks/post-commit" = {
+      text = ''
+        #!/bin/sh
+        lolcommits
+      '';
+      executable = true;
+    };
+  };
+
   #  home.activation.installGhCopilot = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
   #  if ! gh extension list | grep -q github/gh-copilot; then
   #    gh extension install github/gh-copilot

@@ -50,6 +50,7 @@
     pkgs.any-nix-shell
     pkgs.cacert
     pkgs.cargo
+    pkgs.chafa
     pkgs.devbox
     pkgs.direnv
     pkgs.docker
