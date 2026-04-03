@@ -156,11 +156,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1775214472,
-        "narHash": "sha256-YMnRPuaJSBru5DzjoKIewG9g8VEZpoQU6O6LqGpOdTU=",
+        "lastModified": 1775214748,
+        "narHash": "sha256-d/eUzwN845mAjWmeIl6KKriupk5nS9ItN/fxEc1TxHU=",
         "owner": "JeroenKnoops",
         "repo": "lolcommits-flake",
-        "rev": "da32f57b845af57ac74e8ef50c6e91e929135c59",
+        "rev": "9babd6ae48fee50f00f570dbcc1bfcbfc09a10c5",
         "type": "github"
       },
       "original": {
