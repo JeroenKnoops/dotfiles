@@ -56,6 +56,7 @@
     pkgs.docker
     pkgs.docker-buildx
     pkgs.fd
+    pkgs.fh
     pkgs.fly
     pkgs.fzf
     pkgs.git
