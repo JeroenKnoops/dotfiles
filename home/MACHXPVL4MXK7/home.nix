@@ -62,6 +62,7 @@
     pkgs.git
     #      pkgs.gitbutler
     pkgs.gnugrep
+    pkgs.kubo
     pkgs.graphviz
     pkgs.gti
     pkgs.jq
