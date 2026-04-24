@@ -39,6 +39,10 @@
     # '';
   };
 
+  imports = [
+    ./git-find-build.nix
+  ];
+
   home.file.".config/nvim" = {
     source = "${inputs.dotfiles}/nvim";
     recursive = true;
@@ -52,7 +56,6 @@
     pkgs.cargo
     pkgs.chafa
     pkgs.devbox
-    pkgs.direnv
     pkgs.docker
     pkgs.docker-buildx
     pkgs.fd
@@ -89,7 +92,6 @@
     pkgs.wget
     pkgs.yazi
     pkgs.yq-go
-    pkgs.zellij
     pkgs.zld
     pkgs.zsh
     pkgs.zsh-syntax-highlighting
@@ -125,6 +127,11 @@
 
     pwdc.enable = true;
 
+    git.findBuild = {
+      enable = true;
+      notesRef = "refs/notes/commits";
+    };
+    
     bat.enable = true;
     # starship.enable = true;
     lazygit = {
@@ -140,10 +147,6 @@
     };
     tmux = {
       enable = true;
-    };
-    direnv = {
-      enable = true;
-      enableZshIntegration = true;
     };
     fzf = {
       enable = true;

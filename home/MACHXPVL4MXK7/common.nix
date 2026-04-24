@@ -77,7 +77,6 @@
       pkgs.wget
       pkgs.yazi
       pkgs.yq-go
-      pkgs.zellij
       pkgs.zld
       pkgs.zsh
       pkgs.zsh-syntax-highlighting
@@ -126,10 +125,6 @@
     };
     tmux = {
       enable = true;
-    };
-    direnv = {
-      enable = true;
-      enableZshIntegration = true;
     };
     fzf = {
       enable = true;

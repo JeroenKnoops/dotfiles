@@ -53,6 +53,9 @@
             allowedSignersFile = "~/.ssh/allowed_signers";
           };
         };
+        remote.origin.fetch = [
+          "+refs/notes/*:refs/notes/*"
+        ];
         core = {
           pager = "";
           editor = "nvim";
