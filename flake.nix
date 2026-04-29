@@ -5,6 +5,7 @@
     # Specify the source of Home Manager and Nixpkgs.
     fh.url = "https://flakehub.com/f/DeterminateSystems/fh/*.tar.gz";
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*.tar.gz";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";

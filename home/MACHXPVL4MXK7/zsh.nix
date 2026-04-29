@@ -76,6 +76,9 @@
         neofetch
         any-nix-shell zsh --info-right | source /dev/stdin
         # cat ~/.config/yabai/yhelp 
+        echo '-----------------------------------------------------------------'
+        echo 'op run --env-file="./.env" <command>'
+        echo '-----------------------------------------------------------------'
         cat ~/.config/aerohelp 
         			'';
 

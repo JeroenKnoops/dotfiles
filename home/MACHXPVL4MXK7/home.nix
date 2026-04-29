@@ -6,6 +6,12 @@
   lolcommits,
   ...
 }:
+let
+  pkgsUnstable = import inputs.nixpkgs-unstable {
+    inherit (pkgs.stdenv.hostPlatform) system;
+    config.allowUnfree = true;
+  };
+in
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -74,7 +80,7 @@
     pkgs.nil
     pkgs.nodejs
     pkgs.ratchet
-    pkgs.opencode
+    pkgsUnstable.opencode
     pkgs.protobuf
     pkgs.python313
     pkgs.python313Packages.pip
@@ -131,7 +137,7 @@
       enable = true;
       notesRef = "refs/notes/commits";
     };
-    
+
     bat.enable = true;
     # starship.enable = true;
     lazygit = {
