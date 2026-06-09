@@ -104,7 +104,6 @@ in
     pkgs.vscode
     pkgs.watch
     pkgs.wget
-    pkgs.yazi
     pkgs.yq-go
     pkgs.zld
     pkgs.zsh
@@ -127,8 +126,15 @@ in
       vimAlias = true;
       vimdiffAlias = true;
       defaultEditor = true;
+      withRuby = false;
+      withPython3 = false;
       plugins = with pkgs.vimPlugins; [
       ];
+    };
+
+    yazi = {
+      enable = true;
+      shellWrapperName = "y";
     };
 
     pwdc.enable = true;
