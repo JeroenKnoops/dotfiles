@@ -64,6 +64,7 @@ in
     pkgs.devbox
     pkgs.docker
     pkgs.docker-buildx
+    pkgs.fastfetch
     pkgs.fd
     pkgs.fh
     pkgs.fly
@@ -71,21 +72,28 @@ in
     pkgs.git
     #      pkgs.gitbutler
     pkgs.gnugrep
-    pkgs.kubo
     pkgs.graphviz
     pkgs.gti
     pkgs.jq
+    pkgs.jujutsu
+    pkgs.kubo
     pkgs.maccy
-    pkgs.neofetch
+    pkgs.nerd-fonts.fantasque-sans-mono
+    pkgs.nerd-fonts.fira-code
+    pkgs.nerd-fonts.hack
+    pkgs.nerd-fonts.inconsolata
+    pkgs.nerd-fonts.jetbrains-mono
+    pkgs.nerd-fonts.roboto-mono
     pkgs.nil
+    pkgs.nixfmt
     pkgs.nodejs
-    pkgs.ratchet
     pkgsUnstable.opencode
+    pkgs.pipenv
     pkgs.protobuf
     pkgs.python313
     pkgs.python313Packages.pip
-    pkgs.pipenv
     pkgs.qemu
+    pkgs.ratchet
     pkgs.ripgrep
     pkgs.stack
     pkgs.stow
@@ -101,14 +109,6 @@ in
     pkgs.zld
     pkgs.zsh
     pkgs.zsh-syntax-highlighting
-    pkgs.jujutsu
-    pkgs.nixfmt
-    pkgs.nerd-fonts.fira-code
-    pkgs.nerd-fonts.inconsolata
-    pkgs.nerd-fonts.jetbrains-mono
-    pkgs.nerd-fonts.roboto-mono
-    pkgs.nerd-fonts.fantasque-sans-mono
-    pkgs.nerd-fonts.hack
     lolcommits
   ];
 

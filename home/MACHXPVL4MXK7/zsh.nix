@@ -62,7 +62,7 @@
 
         PEG = "/Users/phnl310181059/";
       };
-      initContent = ''
+      initContent = lib.mkAfter ''
         function y() {
         	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
         	yazi "$@" --cwd-file="$tmp"
