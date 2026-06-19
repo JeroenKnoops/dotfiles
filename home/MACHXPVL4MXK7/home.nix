@@ -4,6 +4,7 @@
   inputs,
   nix-index-database,
   lolcommits,
+  opencode,
   ...
 }:
 let
@@ -87,7 +88,8 @@ in
     pkgs.nil
     pkgs.nixfmt
     pkgs.nodejs
-    pkgsUnstable.opencode
+    # opencode
+    pkgs.opencode
     pkgs.pipenv
     pkgs.protobuf
     pkgs.python313

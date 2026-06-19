@@ -22,6 +22,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lolcommits-flake.url = "github:JeroenKnoops/lolcommits-flake";
+    opencode.url = "github:anomalyco/opencode/dev";
     _1password-shell-plugins.url = "github:1Password/shell-plugins";
 
   };
@@ -73,6 +74,7 @@
             inherit inputs;
             pwdcPackage = pwdc.packages.${darwinSystem}.default;
             lolcommits = lolcommits-flake.packages.${darwinSystem}.default;
+            opencode = inputs.opencode.packages.${darwinSystem}.default;
           };
         };
       };
