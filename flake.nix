@@ -30,6 +30,7 @@
   outputs =
     {
       nixpkgs,
+      nixpkgs-unstable,
       home-manager,
       fh,
       pwdc,

@@ -89,7 +89,7 @@ in
     pkgs.nixfmt
     pkgs.nodejs
     # opencode
-    pkgs.opencode
+    pkgsUnstable.opencode
     pkgs.pipenv
     pkgs.protobuf
     pkgs.python313
