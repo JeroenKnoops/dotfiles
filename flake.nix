@@ -22,8 +22,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lolcommits-flake.url = "github:JeroenKnoops/lolcommits-flake";
-    opencode.url = "github:anomalyco/opencode/dev";
     _1password-shell-plugins.url = "github:1Password/shell-plugins";
+    supacode = {
+      url = "path:./common/supacode";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
   };
 
@@ -36,6 +39,7 @@
       pwdc,
       nix-index-database,
       lolcommits-flake,
+      supacode,
       ...
     }@inputs:
     let
@@ -67,6 +71,9 @@
             ./home/MACHXPVL4MXK7/oh-my-posh.nix
             ./home/MACHXPVL4MXK7/dotfiles.nix
             ./home/MACHXPVL4MXK7/1password.nix
+            {
+              home.packages = [ supacode.packages.${darwinSystem}.supacode ];
+            }
             pwdc.homeModules."aarch64-darwin".default
             nix-index-database.homeModules.default
           ];
@@ -75,7 +82,6 @@
             inherit inputs;
             pwdcPackage = pwdc.packages.${darwinSystem}.default;
             lolcommits = lolcommits-flake.packages.${darwinSystem}.default;
-            opencode = inputs.opencode.packages.${darwinSystem}.default;
           };
         };
       };
