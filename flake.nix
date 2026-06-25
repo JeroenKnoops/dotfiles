@@ -27,6 +27,7 @@
       url = "path:./common/supacode";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    hermes-agent.url = "github:NousResearch/hermes-agent";
 
   };
 
@@ -40,6 +41,7 @@
       nix-index-database,
       lolcommits-flake,
       supacode,
+      hermes-agent,
       ...
     }@inputs:
     let
@@ -72,7 +74,10 @@
             ./home/MACHXPVL4MXK7/dotfiles.nix
             ./home/MACHXPVL4MXK7/1password.nix
             {
-              home.packages = [ supacode.packages.${darwinSystem}.supacode ];
+              home.packages = [
+                supacode.packages.${darwinSystem}.supacode
+                hermes-agent.packages.${darwinSystem}.default
+              ];
             }
             pwdc.homeModules."aarch64-darwin".default
             nix-index-database.homeModules.default
