@@ -28,6 +28,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     hermes-agent.url = "github:NousResearch/hermes-agent";
+    herdr.url = "https://github.com/ogulcancelik/herdr/archive/refs/tags/v0.7.3.tar.gz";
 
   };
 
@@ -42,6 +43,7 @@
       lolcommits-flake,
       supacode,
       hermes-agent,
+      herdr,
       ...
     }@inputs:
     let
@@ -77,6 +79,7 @@
               home.packages = [
                 supacode.packages.${darwinSystem}.supacode
                 hermes-agent.packages.${darwinSystem}.default
+                herdr.packages.${darwinSystem}.default
               ];
             }
             pwdc.homeModules."aarch64-darwin".default
