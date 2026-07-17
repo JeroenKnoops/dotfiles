@@ -100,6 +100,7 @@ in
     pkgs.qemu
     pkgs.ratchet
     pkgs.ripgrep
+    pkgs.secretspec
     pkgs.stack
     pkgs.stow
     pkgs.tmux
