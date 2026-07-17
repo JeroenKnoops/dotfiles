@@ -92,6 +92,7 @@ in
     pkgs.nodejs
     # opencode
     pkgsUnstable.opencode
+    pkgs.pi-coding-agent
     pkgs.pipenv
     pkgs.protobuf
     pkgs.python313

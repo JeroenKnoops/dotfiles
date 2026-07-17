@@ -75,13 +75,23 @@
             ./home/MACHXPVL4MXK7/oh-my-posh.nix
             ./home/MACHXPVL4MXK7/dotfiles.nix
             ./home/MACHXPVL4MXK7/1password.nix
-            {
-              home.packages = [
-                supacode.packages.${darwinSystem}.supacode
-                hermes-agent.packages.${darwinSystem}.default
-                herdr.packages.${darwinSystem}.default
-              ];
-            }
+            (
+              { lib, ... }:
+              {
+                home.packages = [
+                  supacode.packages.${darwinSystem}.supacode
+                  hermes-agent.packages.${darwinSystem}.default
+                  herdr.packages.${darwinSystem}.default
+                ];
+
+                home.activation.installHerdrIntegrations = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+                  mkdir -p "$HOME/.config/opencode" "$HOME/.hermes"
+                  ${herdr.packages.${darwinSystem}.default}/bin/herdr integration install opencode
+                  ${herdr.packages.${darwinSystem}.default}/bin/herdr integration install hermes
+#                  ${herdr.packages.${darwinSystem}.default}/bin/herdr integration install pi
+                '';
+              }
+            )
             pwdc.homeModules."aarch64-darwin".default
             nix-index-database.homeModules.default
           ];
