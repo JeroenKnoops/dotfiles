@@ -63,7 +63,7 @@ in
     pkgs.cacert
     pkgs.cargo
     pkgs.chafa
-    pkgsUnstable.cmux
+    #pkgsUnstable.cmux
     pkgs.devbox
     pkgs.docker
     pkgs.docker-buildx

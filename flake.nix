@@ -75,6 +75,7 @@
             ./home/MACHXPVL4MXK7/oh-my-posh.nix
             ./home/MACHXPVL4MXK7/dotfiles.nix
             ./home/MACHXPVL4MXK7/1password.nix
+            ./home/MACHXPVL4MXK7/tools.nix
             (
               { lib, ... }:
               {
@@ -88,7 +89,6 @@
                   mkdir -p "$HOME/.config/opencode" "$HOME/.hermes"
                   ${herdr.packages.${darwinSystem}.default}/bin/herdr integration install opencode
                   ${herdr.packages.${darwinSystem}.default}/bin/herdr integration install hermes
-#                  ${herdr.packages.${darwinSystem}.default}/bin/herdr integration install pi
                 '';
               }
             )
