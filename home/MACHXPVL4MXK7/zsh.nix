@@ -62,20 +62,54 @@
 
         PEG = "/Users/phnl310181059/";
       };
-      initContent = ''
+      initContent = lib.mkAfter ''
+        function ensure_flakehub_login() {
+          if ! command -v determinate-nixd >/dev/null 2>&1 || ! command -v op >/dev/null 2>&1; then
+            return 0
+          fi
+
+          if determinate-nixd status 2>/dev/null | grep -q '^Logged in: true$'; then
+            return 0
+          fi
+
+          local tmp
+          tmp="$(mktemp)" || return 1
+
+          if ! op read "op://Personal/Flakehub/credential" > "$tmp" 2>/dev/null || [ ! -s "$tmp" ]; then
+            rm -f -- "$tmp"
+            return 1
+          fi
+
+          determinate-nixd login token --token-file "$tmp"
+          local status=$?
+          rm -f -- "$tmp"
+          return $status
+        }
+
+        function home-manager() {
+          if [ "$1" = "switch" ]; then
+            ensure_flakehub_login || return $?
+          fi
+
+          command home-manager "$@"
+        }
+
         function y() {
-        	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-        	yazi "$@" --cwd-file="$tmp"
-        	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+         	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+         	yazi "$@" --cwd-file="$tmp"
+         	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
         		builtin cd -- "$cwd"
         	fi
         	rm -f -- "$tmp"
         }
 
         toilet -f mono12  -F metal $(date +'%T')
-        neofetch
+        fastfetch
         any-nix-shell zsh --info-right | source /dev/stdin
         # cat ~/.config/yabai/yhelp 
+        echo '-----------------------------------------------------------------'
+        echo 'op run --env-file="./.env" <command>'
+        echo '-----------------------------------------------------------------'
         cat ~/.config/aerohelp 
         			'';
 

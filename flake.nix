@@ -5,9 +5,10 @@
     # Specify the source of Home Manager and Nixpkgs.
     fh.url = "https://flakehub.com/f/DeterminateSystems/fh/*.tar.gz";
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*.tar.gz";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -21,35 +22,50 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lolcommits-flake.url = "github:JeroenKnoops/lolcommits-flake";
+    _1password-shell-plugins.url = "github:1Password/shell-plugins";
+    supacode = {
+      url = "path:./common/supacode";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    hermes-agent.url = "github:NousResearch/hermes-agent";
+    herdr.url = "https://github.com/ogulcancelik/herdr/archive/refs/tags/v0.7.3.tar.gz";
+
   };
 
   outputs =
     {
       nixpkgs,
+      nixpkgs-unstable,
       home-manager,
       fh,
       pwdc,
-      dotfiles,
       nix-index-database,
       lolcommits-flake,
+      supacode,
+      hermes-agent,
+      herdr,
       ...
     }@inputs:
+    let
+      linuxSystem = "x86_64-linux";
+      darwinSystem = "aarch64-darwin";
+    in
     {
 
       homeConfigurations = {
         "jeroenknoops@sh101" = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs { system = "x86_64-linux"; };
+          pkgs = import nixpkgs { system = linuxSystem; };
 
           modules = [
             {
-              environment.systemPackages = [ fh.packages.x86_64-linux.default ];
+              home.packages = [ fh.packages.${linuxSystem}.default ];
             }
             ./home/sh101-home.nix
           ];
         };
 
         "phnl310118059@MACHXPVL4MXK7" = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs { system = "aarch64-darwin"; };
+          pkgs = import nixpkgs { system = darwinSystem; };
 
           modules = [
             ./home/MACHXPVL4MXK7/home.nix
@@ -58,14 +74,32 @@
             ./home/MACHXPVL4MXK7/darwin-aerospace.nix
             ./home/MACHXPVL4MXK7/oh-my-posh.nix
             ./home/MACHXPVL4MXK7/dotfiles.nix
+            ./home/MACHXPVL4MXK7/1password.nix
+            ./home/MACHXPVL4MXK7/tools.nix
+            (
+              { lib, ... }:
+              {
+                home.packages = [
+                  supacode.packages.${darwinSystem}.supacode
+                  hermes-agent.packages.${darwinSystem}.default
+                  herdr.packages.${darwinSystem}.default
+                ];
+
+                home.activation.installHerdrIntegrations = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+                  mkdir -p "$HOME/.config/opencode" "$HOME/.hermes"
+                  ${herdr.packages.${darwinSystem}.default}/bin/herdr integration install opencode
+                  ${herdr.packages.${darwinSystem}.default}/bin/herdr integration install hermes
+                '';
+              }
+            )
             pwdc.homeModules."aarch64-darwin".default
             nix-index-database.homeModules.default
           ];
 
           extraSpecialArgs = {
             inherit inputs;
-            pwdcPackage = pwdc.packages."aarch64-darwin".default;
-            lolcommits = lolcommits-flake.packages."aarch64-darwin".default;
+            pwdcPackage = pwdc.packages.${darwinSystem}.default;
+            lolcommits = lolcommits-flake.packages.${darwinSystem}.default;
           };
         };
       };

@@ -1,11 +1,19 @@
 {
   config,
   pkgs,
+  lib,
   inputs,
   nix-index-database,
   lolcommits,
+  opencode,
   ...
 }:
+let
+  pkgsUnstable = import inputs.nixpkgs-unstable {
+    inherit (pkgs.stdenv.hostPlatform) system;
+    config.allowUnfree = true;
+  };
+in
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -39,6 +47,10 @@
     # '';
   };
 
+  imports = [
+    ./git-find-build.nix
+  ];
+
   home.file.".config/nvim" = {
     source = "${inputs.dotfiles}/nvim";
     recursive = true;
@@ -51,11 +63,13 @@
     pkgs.cacert
     pkgs.cargo
     pkgs.chafa
+    #pkgsUnstable.cmux
     pkgs.devbox
-    pkgs.direnv
     pkgs.docker
     pkgs.docker-buildx
+    pkgs.fastfetch
     pkgs.fd
+    pkgs.fh
     pkgs.fly
     pkgs.fzf
     pkgs.git
@@ -64,18 +78,29 @@
     pkgs.graphviz
     pkgs.gti
     pkgs.jq
+    pkgs.jujutsu
+    pkgs.kubo
     pkgs.maccy
-    pkgs.neofetch
+    pkgs.nerd-fonts.fantasque-sans-mono
+    pkgs.nerd-fonts.fira-code
+    pkgs.nerd-fonts.hack
+    pkgs.nerd-fonts.inconsolata
+    pkgs.nerd-fonts.jetbrains-mono
+    pkgs.nerd-fonts.roboto-mono
     pkgs.nil
+    pkgs.nixfmt
     pkgs.nodejs
-    pkgs.ratchet
-    pkgs.opencode
+    # opencode
+    pkgsUnstable.opencode
+    pkgs.pi-coding-agent
+    pkgs.pipenv
     pkgs.protobuf
     pkgs.python313
     pkgs.python313Packages.pip
-    pkgs.pipenv
     pkgs.qemu
+    pkgs.ratchet
     pkgs.ripgrep
+    pkgs.secretspec
     pkgs.stack
     pkgs.stow
     pkgs.tmux
@@ -85,20 +110,10 @@
     pkgs.vscode
     pkgs.watch
     pkgs.wget
-    pkgs.yazi
     pkgs.yq-go
-    pkgs.zellij
     pkgs.zld
     pkgs.zsh
     pkgs.zsh-syntax-highlighting
-    pkgs.jujutsu
-    pkgs.nixfmt
-    pkgs.nerd-fonts.fira-code
-    pkgs.nerd-fonts.inconsolata
-    pkgs.nerd-fonts.jetbrains-mono
-    pkgs.nerd-fonts.roboto-mono
-    pkgs.nerd-fonts.fantasque-sans-mono
-    pkgs.nerd-fonts.hack
     lolcommits
   ];
 
@@ -117,11 +132,23 @@
       vimAlias = true;
       vimdiffAlias = true;
       defaultEditor = true;
+      withRuby = false;
+      withPython3 = false;
       plugins = with pkgs.vimPlugins; [
       ];
     };
 
+    yazi = {
+      enable = true;
+      shellWrapperName = "y";
+    };
+
     pwdc.enable = true;
+
+    git.findBuild = {
+      enable = true;
+      notesRef = "refs/notes/commits";
+    };
 
     bat.enable = true;
     # starship.enable = true;
@@ -138,10 +165,6 @@
     };
     tmux = {
       enable = true;
-    };
-    direnv = {
-      enable = true;
-      enableZshIntegration = true;
     };
     fzf = {
       enable = true;
